@@ -72,7 +72,9 @@ Use the higher-order function getWinners to do the following:
 // 2 parameters data fifData / getfinalscb
 function getWinners(array, getFinalscb) {
     /* code here */
-   return getFinalscb(array).map(match => match["Home Team Goals"] > match["Away Team Goals"]
+   return getFinalscb
+   
+   (array).map(match => match["Home Team Goals"] > match["Away Team Goals"]
    ? match['Home Team Name']
    : match['Away Team Name']
    );
@@ -95,9 +97,10 @@ hint: the strings returned need to exactly match the string in step 4.
 
 //array two call back functions use map here
 
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(array, getYearscb, getWinnerscb) {
+
 }
+
 
 
 
@@ -112,8 +115,13 @@ Use the higher order function getAverageGoals to do the following:
 */
 
 
-function getAverageGoals(/* code here */) {
-   /* code here */
+function getAverageGoals(getFinalscb) {
+   let home = getFinalscb.reduce((total,item) =>{
+       return total += (item['Home Team Goals'] + item['Away Team Goals'])
+   },0);
+
+   const averageGoals = (home/getFinalscb.length).toFixed(2);
+   return averageGoals;
 }
 
 
