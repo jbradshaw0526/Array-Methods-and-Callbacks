@@ -72,15 +72,15 @@ Use the higher-order function getWinners to do the following:
 // 2 parameters data fifData / getfinalscb
 function getWinners(array, getFinalscb) {
     /* code here */
-   return getFinalscb
-   
-   (array).map(match => match["Home Team Goals"] > match["Away Team Goals"]
-   ? match['Home Team Name']
-   : match['Away Team Name']
-   );
-    return getWinners;
-
+   const winner = (getFinalscb(array)).map((item)=>{
+       if(item['Home Team Goals'] > item['Away Team Goals']){
+           return item['Home Team Name'];
+       }else if(item['Home Team Goals'] < item['Away Team Goals']){
+           return item['Away Team Name'];
+       }
+   })
     //want an aray of winners
+    return winner;
 }
 
 
@@ -97,8 +97,20 @@ hint: the strings returned need to exactly match the string in step 4.
 
 //array two call back functions use map here
 
-function getWinnersByYear(array, getYearscb, getWinnerscb) {
+function getWinnersByYear(array, getYearscb, getWinners) {
 
+const winnerByYear = [];
+
+const year = getYearscb(array, getWinners);
+
+const winner = getWinners(array, getFinals);
+
+for (let i=0; i < year.length; i++) {
+    winnerByYear.push(`In ${year[i]}, ${winner[i]} won the world cup!`);
+}
+
+
+return winnerByYear;
 }
 
 
